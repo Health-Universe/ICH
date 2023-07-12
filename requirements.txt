@@ -1,0 +1,6 @@
+xgboost==1.6.1
+streamlit==1.15.1
+pandas==1.4.2
+protobuf==3.19.4
+streamlit-option-menu==0.3.2
+scikit-learn==1.1.1
