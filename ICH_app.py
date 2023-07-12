@@ -44,6 +44,10 @@ def set_background():
 
 set_background()
 st.markdown("<h1 style='text-align: center'>xxx system</h1>", unsafe_allow_html=True)
+select_dic = {
+    'No': 0,
+    'Yes': 1
+}
 col1, col2, col3 = st.columns([2, 6, 2])
 with col1:
     st.image('logo.png')
@@ -52,13 +56,13 @@ with col2:
     with st.form("my_form"):
         in_time = st.text_input("intime (eg.2022-12-01 13:00:00)")
         out_time = st.text_input("outime (eg.2022-12-01 13:00:00)")
-        anticoagulants = st.selectbox('anticoagulants', (0, 1))
-        mannitol = st.selectbox('mannitol', (0, 1))
-        vaso_drug = st.selectbox('vaso_drug', (0, 1))
-        ventilation = st.selectbox('ventilation', (0, 1))
+        anticoagulants = st.selectbox('anticoagulants', ('No', 'Yes'))
+        mannitol = st.selectbox('mannitol', ('No', 'Yes'))
+        vaso_drug = st.selectbox('vaso_drug', ('No', 'Yes'))
+        ventilation = st.selectbox('ventilation', ('No', 'Yes'))
         temperature_mean = st.text_input("temperature_mean")
-        surgical_intervention = st.selectbox('surgical_intervention', (0, 1))
-        heart_failure = st.selectbox('heart_failure', (0, 1))
+        surgical_intervention = st.selectbox('surgical_intervention', ('No', 'Yes'))
+        heart_failure = st.selectbox('heart_failure', ('No', 'Yes'))
         potassium_mean = st.text_input("potassium_mean")
         gcs_min = st.text_input("gcs_min")
         sofa = st.text_input("sofa")
@@ -72,8 +76,9 @@ with col2:
             flag = datetime.datetime.strptime(
                 out_time, "%Y-%m-%d %H:%M:%S") - datetime.datetime.strptime(in_time, "%Y-%m-%d %H:%M:%S")
             test_df = pd.DataFrame(
-                [anticoagulants, mannitol, vaso_drug, ventilation, float(temperature_mean), surgical_intervention,
-                 heart_failure, float(potassium_mean), int(gcs_min), int(sofa), float(calcium_mean), float(spo2_mean),
+                [select_dic[anticoagulants], select_dic[mannitol], select_dic[vaso_drug], select_dic[ventilation], 
+                 float(temperature_mean), select_dic[surgical_intervention], select_dic[heart_failure],
+                 float(potassium_mean), int(gcs_min), int(sofa), float(calcium_mean), float(spo2_mean),
                  float(rdw_mean), float(sodium_mean), pd.Series(flag).dt.total_seconds()[0] / 86400]).T
             st.subheader("Probability of disease occurrence: {:.3f}%".format(model.predict_proba(test_df)[0][1] * 100))
 
