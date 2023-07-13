@@ -31,8 +31,8 @@ def set_background():
     .css-18ni7ap {background: rgb(0, 120, 190);z-index:1;height:3rem}
     #MainMenu {visibility:hidden;}
     footer {visibility:hidden;}
-    .css-18e3th9 {padding: 0 1rem 1rem}
-    .css-12ttj6m {box-shadow: 0.05rem 0.05rem 0.2rem 0.1rem rgb(192, 192, 192);margin-top:2vh}
+    .css-z5fcl4 {padding: 0 1rem 1rem}
+    .css-12ttj6m {box-shadow: 0.05rem 0.05rem 0.2rem 0.1rem rgb(192, 192, 192);margin:0 calc(20% + 0.5rem);}
     .css-1cbqeqj {text-align: center;}
     .css-1x8cf1d {background: #00800082}
     .css-1x8cf1d:hover {background: #00800033}
@@ -53,16 +53,16 @@ with col1:
     st.image('logo.png')
 with col2:
     st.markdown("<h2 style='text-align: center'>xxx system</h2>", unsafe_allow_html=True)
-    with st.form("my_form"):
-        in_time = st.text_input("intime (eg.2022-12-01 13:00:00)")
-        out_time = st.text_input("outime (eg.2022-12-01 13:00:00)")
-        anticoagulants = st.selectbox('anticoagulants', ('No', 'Yes'))
-        mannitol = st.selectbox('mannitol', ('No', 'Yes'))
-        vaso_drug = st.selectbox('vaso_drug', ('No', 'Yes'))
-        ventilation = st.selectbox('ventilation', ('No', 'Yes'))
-        temperature_mean = st.text_input("temperature_mean")
-        surgical_intervention = st.selectbox('surgical_intervention', ('No', 'Yes'))
-        heart_failure = st.selectbox('heart_failure', ('No', 'Yes'))
+with st.form("my_form"):
+    col9, col10, col11, col12 = st.columns([2.5, 2.5, 2.5, 2.5])
+    col7, col8 = st.columns([5, 5])
+    with col9:
+        in_time = st.date_input(
+            "intime",
+            datetime.datetime.now())
+    with col10:
+        in_time_ = st.time_input("", datetime.time(8, 0), step=60)
+    with col7:
         potassium_mean = st.text_input("potassium_mean")
         gcs_min = st.text_input("gcs_min")
         sofa = st.text_input("sofa")
@@ -70,18 +70,32 @@ with col2:
         spo2_mean = st.text_input("spo2_mean")
         rdw_mean = st.text_input("rdw_mean")
         sodium_mean = st.text_input("sodium_mean")
+    with col11:
+        out_time = st.date_input(
+            "outime",
+            datetime.datetime.now())
+    with col12:
+        out_time_ = st.time_input("", datetime.time(8, 0), key='444', step=60)
+    with col8:
+        anticoagulants = st.selectbox('anticoagulants', ('No', 'Yes'))
+        mannitol = st.selectbox('mannitol', ('No', 'Yes'))
+        vaso_drug = st.selectbox('vaso_drug', ('No', 'Yes'))
+        ventilation = st.selectbox('ventilation', ('No', 'Yes'))
+        temperature_mean = st.text_input("temperature_mean")
+        surgical_intervention = st.selectbox('surgical_intervention', ('No', 'Yes'))
+        heart_failure = st.selectbox('heart_failure', ('No', 'Yes'))
 
-        submitted = st.form_submit_button("Calculate")
-        if submitted:
-            flag = datetime.datetime.strptime(
-                out_time, "%Y-%m-%d %H:%M:%S") - datetime.datetime.strptime(in_time, "%Y-%m-%d %H:%M:%S")
-            test_df = pd.DataFrame(
-                [select_dic[anticoagulants], select_dic[mannitol], select_dic[vaso_drug], select_dic[ventilation], 
-                 float(temperature_mean), select_dic[surgical_intervention], select_dic[heart_failure],
-                 float(potassium_mean), int(gcs_min), int(sofa), float(calcium_mean), float(spo2_mean),
-                 float(rdw_mean), float(sodium_mean), pd.Series(flag).dt.total_seconds()[0] / 86400]).T
-            st.subheader("Probability of disease occurrence: {:.3f}%".format(model.predict_proba(test_df)[0][1] * 100))
-
+    submitted = st.form_submit_button("Calculate")
+    if submitted:
+        flag = datetime.datetime.combine(out_time, out_time_) - datetime.datetime.combine(in_time, in_time_)
+        test_df = pd.DataFrame(
+            [select_dic[anticoagulants], select_dic[mannitol], select_dic[vaso_drug], select_dic[ventilation],
+             float(temperature_mean), select_dic[surgical_intervention], select_dic[heart_failure],
+             float(potassium_mean), int(gcs_min), int(sofa), float(calcium_mean), float(spo2_mean),
+             float(rdw_mean), float(sodium_mean), pd.Series(flag).dt.total_seconds()[0] / 86400]).T
+        st.subheader("Probability of disease occurrence: {:.3f}%".format(model.predict_proba(test_df)[0][1] * 100))
+col4, col5, col6 = st.columns([2, 6, 2])
+with col5:
     selected_footer = option_menu(
         menu_title=None,
         options=["Project Instruction", "Model Description", "Model Description Figures", "Project Flow Chart"],
