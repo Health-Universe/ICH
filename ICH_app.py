@@ -81,9 +81,9 @@ with st.form("my_form"):
              int(gcs_min), float(chloride_mean)]).T
         pre_res = model.predict_proba(test_df)[0][1] * 100
         if  pre_res> 29.3:
-            flag = 'Please early intervention and monitoring.'
+            flag = "Please early intervention and monitoring."
         elif pre_res < 29.3:
-            flag = 'Please continue the current effective treatment and closely monitor the patient's condition.'
+            flag = "Please continue the current effective treatment and closely monitor the patient's condition."
         st.subheader("The probability of being hospitalized and dying from the disease is {:.3f}%（the threshold for  disease mortality is 29.3%）".format(pre_res))
         st.subheader(flag)
 
