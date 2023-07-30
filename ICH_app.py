@@ -56,7 +56,6 @@ with col2:
     st.markdown("<h2 style='text-align: center'>Please answer the questions below to calculate:</h2>", unsafe_allow_html=True)
 with st.form("my_form"):
     col7, col8 = st.columns([5, 5])
-    spo2_mean = st.empty()
     with col7:
         vaso_drug = st.selectbox('Use of vasoactive drugs', ('No', 'Yes'))
         mannitol = st.selectbox('Use of mannitol', ('No', 'Yes'))
@@ -72,7 +71,7 @@ with st.form("my_form"):
         rdw_mean = st.text_input("RDW(%)")
         sodium_mean = st.text_input("Sodium(mmol/L)")
         potassium_mean = st.text_input("Potassium(mmol/L)")
-        spo2_mean = spo2_mean.text_input("Blood oxygen saturation(%)")
+        spo2_mean = st.text_input("Blood oxygen saturation(%)")
     col4, col5, col6 = st.columns([2, 2, 6])
     with col4:
         submitted = st.form_submit_button("Calculate")
@@ -105,4 +104,3 @@ with st.form("my_form"):
             st.image('force.png')
     elif reset:
         st.experimental_rerun()
-        spo2_mean.empty()
