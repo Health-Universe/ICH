@@ -13,7 +13,7 @@ if 'model' not in st.session_state:
 else:
     model = st.session_state["model"]
 
-st.set_page_config(page_title='xxx', layout="wide", page_icon=':ambulance:')
+st.set_page_config(page_title='Web Calculator For sICH', layout="wide", page_icon=':ambulance:')
 
 
 def get_base64(bin_file):
