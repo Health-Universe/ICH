@@ -49,6 +49,7 @@ select_dic = {
     'No': 0,
     'Yes': 1
 }
+@st.cache_resource
 col1, col2, col3 = st.columns([2, 6, 2])
 # with col1:
 #     st.image('logo.png')
@@ -100,4 +101,5 @@ with st.form("my_form"):
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
     elif reset:
-        st.cache_data.clear()
+        # st.cache_data.clear()
+        st.cache_resource.clear()
