@@ -49,7 +49,6 @@ select_dic = {
     'No': 0,
     'Yes': 1
 }
-@st.cache_resource
 col1, col2, col3 = st.columns([2, 6, 2])
 # with col1:
 #     st.image('logo.png')
@@ -73,8 +72,11 @@ with st.form("my_form"):
         sodium_mean = st.text_input("Sodium(mmol/L)")
         potassium_mean = st.text_input("Potassium(mmol/L)")
         spo2_mean = st.text_input("Blood oxygen saturation(%)")
-    submitted = st.form_submit_button("Calculate")
-    reset = st.form_submit_button("Reset")
+    col4, col5, col6 = st.columns([3, 3, 4])
+    with col4:
+        submitted = st.form_submit_button("Calculate")
+    with col5:
+        reset = st.form_submit_button("Reset")
     if submitted:
         test_df = pd.DataFrame(
             [select_dic[anticoagulants], select_dic[mannitol], select_dic[vaso_drug], select_dic[ventilation],
@@ -101,5 +103,4 @@ with st.form("my_form"):
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
     elif reset:
-        # st.cache_data.clear()
-        st.cache_resource.clear()
+        st.experimental_rerun()
