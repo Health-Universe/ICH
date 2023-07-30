@@ -6,6 +6,7 @@ import datetime
 import pandas as pd
 import time
 import shap
+import matplotlib.pyplot as plt
 
 if 'model' not in st.session_state:
     model = joblib.load('model.pkl')
