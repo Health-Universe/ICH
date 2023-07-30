@@ -104,4 +104,4 @@ with st.form("my_form"):
             st.image('force.png')
     elif reset:
         st.experimental_rerun()
-        st.caching.clear_cache()
+        st.stop()
