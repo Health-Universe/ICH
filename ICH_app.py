@@ -93,8 +93,9 @@ with st.form("my_form"):
             shap.force_plot(explainer.expected_value, shap_values[0], test_df.iloc[0].values, feature_names=['Use of anticoagulant drugs', 'Use of mannitol', 'Use of vasoactive drugs', 
                                                           'Mechanical ventilation', 'Temperature', 'Surgical intervention', 'Potassium', 
                                                           'SOFA', 'Blood oxygen saturation', 'RDW', 'Heart failure', 'Sodium', 'GCS', 'Chloride'], matplotlib=True, show=False)
+            plt.figure(figsize=(24, 8))
             plt.xticks(fontproperties='Times New Roman', size=16)
             plt.yticks(fontproperties='Times New Roman', size=16)
-            # plt.tight_layout()
+            plt.tight_layout()
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
