@@ -100,4 +100,4 @@ with st.form("my_form"):
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
     elif reset:
-        st.caching.clear_cache()
+        st.cache_data.clear()
