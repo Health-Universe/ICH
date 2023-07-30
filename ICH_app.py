@@ -94,7 +94,7 @@ with st.form("my_form"):
                                                           'Mechanical ventilation', 'Temperature', 'Surgical intervention', 'Potassium', 
                                                           'SOFA', 'Blood oxygen saturation', 'RDW', 'Heart failure', 'Sodium', 'GCS', 'Chloride'], matplotlib=True, show=False)
             plt.xticks(fontproperties='Times New Roman', size=16)
-            plt.yticks(fontproperties='Times New Roman', size=20)
+            plt.yticks(fontproperties='Times New Roman', size=16)
             plt.tight_layout()
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
