@@ -104,12 +104,4 @@ with st.form("my_form"):
             st.image('force.png')
     elif reset:
         st.experimental_rerun()
-        vaso_drug = mannitol = anticoagulants = ventilation = heart_failure = surgical_intervention = 'No'
-        chloride_mean = ''
-        gcs_min = ''
-        sofa = ''
-        temperature_mean = ''
-        rdw_mean = ''
-        sodium_mean = ''
-        potassium_mean = ''
-        spo2_mean = ''
+        st.caching.clear_cache()
