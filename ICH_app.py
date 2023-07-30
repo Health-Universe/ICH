@@ -72,7 +72,7 @@ with st.form("my_form"):
         sodium_mean = st.text_input("Sodium(mmol/L)")
         potassium_mean = st.text_input("Potassium(mmol/L)")
         spo2_mean = st.text_input("Blood oxygen saturation(%)")
-    col4, col5, col6 = st.columns([3, 3, 4])
+    col4, col5, col6 = st.columns([2, 2, 6])
     with col4:
         submitted = st.form_submit_button("Calculate")
     with col5:
@@ -104,3 +104,12 @@ with st.form("my_form"):
             st.image('force.png')
     elif reset:
         st.experimental_rerun()
+        vaso_drug = mannitol = anticoagulants = ventilation = heart_failure = surgical_intervention = 'No'
+        chloride_mean = ''
+        gcs_min = ''
+        sofa = ''
+        temperature_mean = ''
+        rdw_mean = ''
+        sodium_mean = ''
+        potassium_mean = ''
+        spo2_mean = ''
