@@ -74,7 +74,6 @@ with st.form("my_form"):
         spo2_mean = st.text_input("Blood oxygen saturation(%)")
     submitted = st.form_submit_button("Calculate")
     reset = st.form_submit_button("Reset")
-    st.caching.clear_cache()
     if submitted:
         test_df = pd.DataFrame(
             [select_dic[anticoagulants], select_dic[mannitol], select_dic[vaso_drug], select_dic[ventilation],
@@ -100,3 +99,5 @@ with st.form("my_form"):
             plt.tight_layout()
             plt.savefig('force.png', dpi=600)
             st.image('force.png')
+    elif reset:
+        st.caching.clear_cache()
