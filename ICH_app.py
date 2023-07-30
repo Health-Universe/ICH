@@ -50,8 +50,8 @@ select_dic = {
     'Yes': 1
 }
 col1, col2, col3 = st.columns([2, 6, 2])
-with col1:
-    st.image('logo.png')
+# with col1:
+#     st.image('logo.png')
 with col2:
     st.markdown("<h2 style='text-align: center'>Please answer the questions below to calculate:</h2>", unsafe_allow_html=True)
 with st.form("my_form"):
