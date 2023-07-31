@@ -63,7 +63,7 @@ with st.form("my_form"):
         ventilation = st.selectbox('Mechanical ventilation', ('No', 'Yes'))
         heart_failure = st.selectbox('Heart failure', ('No', 'Yes'))
         surgical_intervention = st.selectbox('Surgical intervention', ('No', 'Yes'))
-        chloride_mean = st.text_input("Chloride")
+        chloride_mean = st.text_input("Chloride(mmol/L)")
     with col8:
         gcs_min = st.text_input("GCS")
         sofa = st.text_input("SOFA")
